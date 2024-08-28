@@ -8,3 +8,5 @@ const postRoute = require('./routes/post')
 const commentRoute = require('./routes/comment')
 const likeRoute = require('./routes/like')
 dotenv.config()
+
+const app = express()
