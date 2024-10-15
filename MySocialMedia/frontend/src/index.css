@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.scroll-hidden {
+    @apply overflow-hidden; 
+    overflow-y: auto; 
+    scrollbar-width: none; 
+  }
+  
+  
+  .scroll-hidden::-webkit-scrollbar {
+    display: none; 
+  }
