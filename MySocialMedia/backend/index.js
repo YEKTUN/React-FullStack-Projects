@@ -13,7 +13,22 @@ const { checkUser } = require("./middleware/checkUser");
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+const allowedOrigins = [
+  "http://localhost:5173", 
+  "https://alisocial.onrender.com"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Eğer origin belirtilmemişse (örneğin, Postman gibi araçlardan gelen istekler) kabul et
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    }
+    // İzin verilmeyen bir origin ise hata döndür
+    callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true
+}));
 app.use(express.urlencoded({ extended: true }));
 
 dotenv.config();
