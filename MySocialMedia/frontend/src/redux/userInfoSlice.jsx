@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import{  url} from '../backendUrl';
 
 
 
 export const updateUserInfo = createAsyncThunk('userInfo/updateUserInfo', async ({ id, data }) => {
     try {
-        const response = await axios.post(`http://localhost:5000/userInfo/update-info/${id}`, data, { withCredentials: true });
+        const response = await axios.post(`${url}/userInfo/update-info/${id}`, data, { withCredentials: true });
         return response.data;
     } catch (error) {
         console.error("Registration error:", error.response ? error.response.data : error.message);
@@ -14,7 +15,7 @@ export const updateUserInfo = createAsyncThunk('userInfo/updateUserInfo', async 
 });
 export const getInfo= createAsyncThunk('userInfo/getInfo', async (id) => {
     try {
-        const response = await axios.get(`http://localhost:5000/userInfo/get-info/${id}`, { withCredentials: true });
+        const response = await axios.get(`${url}/userInfo/get-info/${id}`, { withCredentials: true });
         return response.data;
     } catch (error) {
        throw error

@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getUserProfileInfo } from "../redux/authSlice";
 import { FaArrowUp } from "react-icons/fa";
+import {url} from '../backendUrl'
 
 function Post({
   post,
@@ -48,7 +49,7 @@ function Post({
         : [...likes, currentUserId]; // Beğeniyi ekle
 
       const response = await axios.put(
-        `http://localhost:5000/post/update-likes/${id}`,
+        `${url}/post/update-likes/${id}`,
         { likes: updatedLikes },
         { withCredentials: true }
       );
@@ -76,7 +77,7 @@ function Post({
   const updateComment = async (newComment) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/post/update-comment/${id}`,
+        `${url}/post/update-comment/${id}`,
         {
           comment: newComment,
           commentPic: currentProfilePic,
@@ -97,7 +98,7 @@ function Post({
   const getComments = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/post/get-comments/${id}`,
+        `${url}/post/get-comments/${id}`,
         { withCredentials: true }
       );
 

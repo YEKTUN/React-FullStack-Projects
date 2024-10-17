@@ -3,10 +3,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { CircularProgress } from '@mui/material';
-import{ backendUrl} from '../backendUrl';
-const url = process.env.NODE_ENV === 'development' 
-? `http://localhost:5000` 
-: `${backendUrl}`;
+import{  url} from '../backendUrl';
+
 export const getUserInfo =createAsyncThunk('auth/getUserInfo', async (id) => {
   try {
    
@@ -20,7 +18,7 @@ export const getUserInfo =createAsyncThunk('auth/getUserInfo', async (id) => {
 })
 export const getUserProfileInfo =createAsyncThunk('auth/getUserProfileInfo', async () => {
   try {
-    const response = await axios.get(`http://localhost:5000/post/getUserProfileInfo`, { withCredentials: true });
+    const response = await axios.get(`${url}/post/getUserProfileInfo`, { withCredentials: true });
     console.log("response",response.data)
     return response.data;
   } catch (error) {
@@ -30,7 +28,7 @@ export const getUserProfileInfo =createAsyncThunk('auth/getUserProfileInfo', asy
 })
 export const sendRegister = createAsyncThunk('auth/sendRegister', async (data, { rejectWithValue }) => {
   try {
-    const response = await axios.post('http://localhost:5000/auth/register', data);
+    const response = await axios.post(`${url}/auth/register`, data);
     return response.data;
   } catch (error) {
     console.error("Registration error:", error.response ? error.response.data : error.message);
@@ -48,7 +46,7 @@ export const sendLogin = createAsyncThunk('auth/sendLogin', async (data, { rejec
 })
 export const sendLogout = createAsyncThunk('auth/sendLogout', async () => {
   try {
-    const response = await axios.post('http://localhost:5000/auth/logout',{}, { withCredentials: true });
+    const response = await axios.post(`${url}/auth/logout`,{}, { withCredentials: true });
     return response.data;
   } catch (error) {
     console.error("Logout error:", error.response ? error.response.data : error.message);
@@ -57,7 +55,7 @@ export const sendLogout = createAsyncThunk('auth/sendLogout', async () => {
 })
 export const addFollow = createAsyncThunk('auth/addedFollow', async (id) => {
   try {
-    const response = await axios.put(`http://localhost:5000/post/followAdd/${id}`, null, {
+    const response = await axios.put(`${url}/post/followAdd/${id}`, null, {
       withCredentials: true, // Burada olmalı
     });
     return response.data;
@@ -69,7 +67,7 @@ export const addFollow = createAsyncThunk('auth/addedFollow', async (id) => {
 
 export const deleteFollow = createAsyncThunk('auth/deletedFollow', async (id) => {
   try {
-    const response = await axios.put(`http://localhost:5000/post/followSub/${id}`, null, {
+    const response = await axios.put(`${url}/post/followSub/${id}`, null, {
       withCredentials: true, // Aynı şekilde burada da
     });
     return response.data;

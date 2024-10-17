@@ -20,6 +20,7 @@ import {
 } from "../redux/userInfoSlice";
 import { useParams } from "react-router-dom";
 import FollowList from "../components/FollowList";
+import {url} from '../backendUrl'
 
 const profileItems = [
   { id: 1, value: "Name" },
@@ -88,7 +89,7 @@ function Profile() {
   const getProfilePic = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/post/getProfilePhoto/${idParam}`,
+        `${url}/post/getProfilePhoto/${idParam}`,
         { withCredentials: true }
       );
       setProfilePic(response.data.profilePic);
@@ -99,7 +100,7 @@ function Profile() {
   const updateProfilPic = async (formData) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/post/updateProfilePic`,
+        `${url}/post/updateProfilePic`,
         formData,
 
         {

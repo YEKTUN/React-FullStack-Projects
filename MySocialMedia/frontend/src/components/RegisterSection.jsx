@@ -14,9 +14,7 @@ import { CircularProgress } from '@mui/material'
 function RegisterSection() {
   const dispatch = useDispatch();
 
-  // usernameRegiste=usernameRegister
-  // emailRegiste=emailRegister
-  // passwordRegiste=passwordRegister
+ 
   const formik = useFormik({
     initialValues: {
       usernameRegister: "",

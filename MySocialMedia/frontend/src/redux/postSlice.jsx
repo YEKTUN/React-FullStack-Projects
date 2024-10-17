@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
+import{  url} from '../backendUrl';
 const initialState = {
   images: [],
   isCircular: false, 
@@ -9,7 +9,7 @@ const initialState = {
 
 export const sendPost = createAsyncThunk('posts/sendPosts', async (formData) => {
   try {
-    const response = await axios.post('http://localhost:5000/post/create-post', formData,{withCredentials: true});
+    const response = await axios.post(`${url}/auth/logout`, formData,{withCredentials: true});
    
     return response.data;
   } catch (error) {
@@ -20,7 +20,7 @@ export const sendPost = createAsyncThunk('posts/sendPosts', async (formData) => 
 
 export const getPosts = createAsyncThunk('posts/getPosts', async (id) => {
   try {
-    const response = await axios.get(`http://localhost:5000/post/post-all/${id}`,{withCredentials: true});
+    const response = await axios.get(`${url}/post/post-all/${id}`,{withCredentials: true});
    
     return response.data;
   } catch (error) {
@@ -30,7 +30,7 @@ export const getPosts = createAsyncThunk('posts/getPosts', async (id) => {
 });
 export const mixGetPost = createAsyncThunk('posts/mixGetPost', async () => {
   try {
-    const response = await axios.get(`http://localhost:5000/post/mixGetPost`,{withCredentials: true});
+    const response = await axios.get(`${url}/post/mixGetPost`,{withCredentials: true});
    
     return response.data;
   } catch (error) {

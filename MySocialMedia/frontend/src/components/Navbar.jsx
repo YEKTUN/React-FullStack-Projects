@@ -6,6 +6,7 @@ import LogoutIcon from "@mui/icons-material/Logout"; // Örneğin, logout simges
 import { setIsLogin, sendLogout } from "../redux/authSlice";
 import axios from "axios";
 import SearchUsers from "./SearchUsers";
+import {url} from '../backendUrl'
 
 function Navbar() {
   const [search, setSearch] = useState("");
@@ -30,7 +31,7 @@ function Navbar() {
 
     try {
       const response = await axios.get(
-        `http://localhost:5000/userInfo/search-user/${search}`,
+        `${url}/userInfo/search-user/${search}`,
         { withCredentials: true }
       );
       setSearchUsers(response.data.users); // Doğru yer burası
