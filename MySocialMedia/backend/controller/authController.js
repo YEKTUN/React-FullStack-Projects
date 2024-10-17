@@ -69,8 +69,8 @@ const logOut = async (req, res) => {
        
         res.clearCookie('jwt', {
             httpOnly: true,  
-            secure: true,    
-            sameSite: 'Strict',
+           sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+            secure: process.env.NODE_ENV === "production",
             path: '/'       
         });
 
