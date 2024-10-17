@@ -1,0 +1,1 @@
+export const backendUrl = "https://react-fullstack-projects.onrender.com";

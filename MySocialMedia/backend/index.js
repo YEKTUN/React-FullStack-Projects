@@ -19,14 +19,7 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // Eğer origin belirtilmemişse (örneğin, Postman gibi araçlardan gelen istekler) kabul et
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      return callback(null, true);
-    }
-    // İzin verilmeyen bir origin ise hata döndür
-    callback(new Error("Not allowed by CORS"));
-  },
+  origin: "https://alisocial.onrender.com",
   credentials: true
 }));
 app.use(express.urlencoded({ extended: true }));

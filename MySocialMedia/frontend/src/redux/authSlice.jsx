@@ -3,10 +3,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { CircularProgress } from '@mui/material';
-
+import backendUrl from '../backendUrl';
+const url = process.env.NODE_ENV === 'development' 
+? `http://localhost:5000` 
+: `${backendUrl}`;
 export const getUserInfo =createAsyncThunk('auth/getUserInfo', async (id) => {
   try {
-    const response = await axios.get(`http://localhost:5000/post/getUserInfo/${id}`, { withCredentials: true });
+   
+    const response = await axios.get(`${url}/post/getUserInfo/${id}`, { withCredentials: true });
     console.log("response",response.data)
     return response.data;
   } catch (error) {
@@ -35,7 +39,7 @@ export const sendRegister = createAsyncThunk('auth/sendRegister', async (data, {
 });
 export const sendLogin = createAsyncThunk('auth/sendLogin', async (data, { rejectWithValue }) => {
   try {
-    const response = await axios.post('http://localhost:5000/auth/login', data, { withCredentials: true });
+    const response = await axios.post(`${url}/auth/login`, data, { withCredentials: true });
     return response.data;
   } catch (error) {
     console.error("Login error:", error.response ? error.response.data : error.message);
