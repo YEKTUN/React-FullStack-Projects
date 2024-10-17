@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { CircularProgress } from '@mui/material';
-import backendUrl from '../backendUrl';
+import{ backendUrl} from '../backendUrl';
 const url = process.env.NODE_ENV === 'development' 
 ? `http://localhost:5000` 
 : `${backendUrl}`;
