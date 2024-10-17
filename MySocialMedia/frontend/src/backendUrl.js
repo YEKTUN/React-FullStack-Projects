@@ -1,4 +1,4 @@
-const backendUrl = "https://react-fullstack-projects.onrender.com";
-export const url = process.env.NODE_ENV === 'development' 
-? `http://localhost:5000` 
-: `${backendUrl}`;
+export const url ="https://react-fullstack-projects.onrender.com"
+
+// "http://localhost:5000"
+// "https://react-fullstack-projects.onrender.com"
