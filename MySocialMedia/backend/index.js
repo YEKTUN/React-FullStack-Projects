@@ -14,8 +14,8 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = [
-  "http://localhost:5173", // Development ortamındaki frontend URL'si
-  "https://alisocial.onrender.com" // Frontend'in Render üzerinde deploy edildiği URL
+  "http://localhost:5173", 
+  "https://alisocial.onrender.com" 
 ];
 
 app.use(cors({
