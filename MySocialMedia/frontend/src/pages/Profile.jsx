@@ -136,8 +136,7 @@ function Profile() {
   useEffect(() => {
     if (selectFile) {
       handleSubmit();
-    } else {
-    }
+    } 
   }, [selectFile]);
 
   useEffect(() => {
@@ -145,7 +144,8 @@ function Profile() {
     dispatch(getUserInfo(idParam));
     dispatch(getInfo(idParam));
     getProfilePic();
-  }, [dispatch, idParam, _id, follow]);
+    console.log("profilePic", profilePic);
+  }, [dispatch, idParam, _id, follow, ]);
 
   const addedFollow = () => {
     dispatch(addFollow(idParam));
@@ -170,7 +170,7 @@ function Profile() {
         
             <div className=" flex w-[140px] border-2 h-[140px] rounded-full justify-center items-center  mt-8 mb-6 ">
               <img
-                className="w-full h-full rounded-full border-2  "
+                className="w-full h-full rounded-full border-2 object-contain  "
                 src={profilePic}
                 alt="profile"
               />

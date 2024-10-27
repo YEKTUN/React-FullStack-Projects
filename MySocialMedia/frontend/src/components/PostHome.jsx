@@ -133,7 +133,7 @@ function PostHome({
       <div className="flex p-2 items-center w-full h-[100px] justify-between">
         <div className="flex mt-2 ml-2 items-center gap-x-2">
           <img
-            className="w-[50px] h-[50px] rounded-full"
+            className="w-[50px] h-[50px] rounded-full object-contain"
             src={profilePicMix}
             alt=""
           />

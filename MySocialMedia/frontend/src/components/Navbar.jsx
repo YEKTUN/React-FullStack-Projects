@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout"; // Örneğin, logout simgesi
-import { setIsLogin, sendLogout } from "../redux/authSlice";
+import { setIsLogin, sendLogout, getUserProfileInfo } from "../redux/authSlice";
 import axios from "axios";
 import SearchUsers from "./SearchUsers";
 import {url} from '../backendUrl'
@@ -54,14 +54,17 @@ function Navbar() {
 
     document.addEventListener("mousedown", handleClickOutside);
 
-    // Component unmount olduğunda event listener'ı temizle
+    
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+   
   }, []);
 
   useEffect(() => {
     searchWithUsername();
+    dispatch(getUserProfileInfo())
   }, [search, searchUsers.length]);
 
   const logout = () => {
