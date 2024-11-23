@@ -27,19 +27,19 @@ const createPost = async (req, res) => {
   try {
     const { description, likes, comments } = req.body;
 
-    // Description zorunlu, boşsa hata döndürelim
+   
     if (!description) {
       return res.status(400).json({ message: "Description is required" });
     }
 
     let newPost = {};
 
-    // Eğer resim yüklenmişse (req.file varsa) resmi kaydet
+   
     if (req.file) {
       const filePath = req.file.path;
       const folderName = "MySocialApp";
 
-      // Cloudinary gibi bir serviste resmi kaydedelim
+     
       cloudinary.uploader.upload(
         filePath,
         { folder: folderName },
@@ -48,13 +48,13 @@ const createPost = async (req, res) => {
             return res.status(500).json({ message: error.message });
           }
 
-          // Resmi başarıyla yükledikten sonra dosyayı sil
+      
           fs.unlinkSync(filePath);
 
-          // Yeni gönderiyi resimle birlikte kaydet
+          
           newPost = new Post({
             description: description,
-            image: result.secure_url, // Resim URL'si
+            image: result.secure_url,
             user: req.user._id,
             likes: likes,
             comments: comments,
@@ -103,18 +103,17 @@ const likesUpdate = async (req, res) => {
     const userIndex = post.likes.indexOf(userId);
 
     if (userIndex === -1) {
-      // Kullanıcı daha önce beğenmemiş, beğeni ekle
+      
       post.likes.push(userId);
     } else {
-      // Kullanıcı daha önce beğenmiş, beğeniyi kaldır
       post.likes.splice(userIndex, 1);
     }
 
-    // Güncellenmiş beğenileri kaydedip döndürmek için
+    
     const updatedPost = await Post.findByIdAndUpdate(
       postId,
-      { likes: post.likes }, // Güncellenmiş beğeniler
-      { new: true } // Yeni haliyle döndürür
+      { likes: post.likes }, 
+      { new: true } 
     );
 
     if (!updatedPost) {
@@ -123,7 +122,7 @@ const likesUpdate = async (req, res) => {
 
     res.status(200).json({ post: updatedPost });
   } catch (error) {
-    console.error("Error updating likes:", error); // Hata detayını konsola yazdır
+    console.error("Error updating likes:", error); 
     res.status(500).json({ message: error.message });
   }
 };
@@ -138,7 +137,7 @@ const commentUpdate = async (req, res) => {
       return res.status(404).json({ message: "Post not found" });
     }
 
-    // Yeni yorum objesi
+    
     const newComment = {
       user: userId,
       comment: req.body.comment,
@@ -147,14 +146,14 @@ const commentUpdate = async (req, res) => {
      
     };
 
-    // Yorum dizisine yeni yorumu ekle
+  
     post.comments.push(newComment);
     
 
-    // Güncellenmiş gönderiyi kaydet
+
     await post.save();
 
-    // Başarılı işlem sonucunda güncellenmiş gönderiyi döndür
+   
     res.status(200).json({ post });
   } catch (error) {
     console.error("Error updating comments:", error);

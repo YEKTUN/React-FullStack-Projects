@@ -21,6 +21,7 @@ import {
 import { useParams } from "react-router-dom";
 import FollowList from "../components/FollowList";
 import {url} from '../backendUrl'
+import { Alert } from "@mui/material";
 
 const profileItems = [
   { id: 1, value: "Name" },
@@ -66,9 +67,15 @@ function Profile() {
 
     formData.append("description", tweet);
 
-    try {
-      dispatch(sendPost(formData));
-    } catch (error) {}
+   
+      if(tweet.length>0){
+
+        dispatch(sendPost(formData));
+      }else{
+        
+        alert("Please enter tweet")
+      }
+   
   };
 
 
@@ -292,7 +299,7 @@ function Profile() {
                 />
                 <IoIosSend
                   size={27}
-                  className=" text-[#3262b4]"
+                  className=" text-[#3262b4] rounded-full border-2  bg-slate-400 border-slate-700 hover:bg-slate-400 active:bg-white transition-all duration-200"
                   onClick={sendTweet}
                 />
               </div>

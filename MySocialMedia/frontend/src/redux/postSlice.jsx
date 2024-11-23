@@ -9,7 +9,7 @@ const initialState = {
 
 export const sendPost = createAsyncThunk('posts/sendPosts', async (formData) => {
   try {
-    const response = await axios.post(`${url}/auth/logout`, formData,{withCredentials: true});
+    const response = await axios.post(`${url}/post/create-post`, formData,{withCredentials: true});
    
     return response.data;
   } catch (error) {
